@@ -49,6 +49,10 @@ Sau quá trình phân tích và huấn luyện mô hình, có thể rút ra các
 
 ### Về kinh doanh (Business Insights):
 
+* **Doanh số** (Sales): Là yếu tố quan trọng nhất (Importance ~65%). Quy mô đơn hàng quyết định biên độ lợi nhuận (hoặc mức lỗ).
+
+* **Mức Chiết khấu** (Discount): Tác động tiêu cực trực tiếp và mạnh mẽ. Hệ số tương quan là âm, nghĩa là chiết khấu càng cao, lợi nhuận càng thấp.
+
 * **Phân cụm khách hàng** (Customer Clustering): Mô hình K-Means xác định 4 nhóm khách hàng chiến lược dựa trên hành vi tiêu dùng (RFM):
 
     * **VIP**: Nhóm giá trị nhất chi tiêu lớn, tần suất cao. Cần tập trung duy trì lòng trung thành qua dịch vụ ưu tiên.
@@ -59,29 +63,40 @@ Sau quá trình phân tích và huấn luyện mô hình, có thể rút ra các
 
     * **Rời bỏ**: Nhóm chi tiêu thấp và ngừng mua gần khá lâu, chiến lược là tối ưu chi phí bằng cách hạn chế tiếp thị.
 
-* Nhóm đơn hàng bị lỗ có mức giảm giá cao gấp **5.9 lần** so với nhóm an toàn. Điều này khẳng định mức chiết khấu **> 20%** là nguyên nhân chính dẫn đến thua lỗ. Điểm tối ưu ("Sweet Spot") cho lợi nhuận là mức giảm giá **10%**.
+* Nhóm đơn hàng bị lỗ có mức giảm giá cao gấp **5.9 lần** so với nhóm an toàn. Điều này khẳng định mức chiết khấu (Discount) **> 20%** là nguyên nhân chính dẫn đến thua lỗ. Điểm tối ưu ("Sweet Spot") cho lợi nhuận là mức giảm giá **10%**.
 
-* Dữ liệu cho thấy cả Doanh số và Lợi nhuận đều có xu hướng tăng rõ rệt qua từng năm (2014-2017). Quý 4 (Tháng 10, 11, 12) là quý có Doanh số và Lợi nhuận cao nhất trong tất cả các năm.  
+* Cần xem xét lại hiệu quả của các chương trình khuyến mãi giảm giá sâu (Deep Discount). Việc giảm giá tới 50-60% để đẩy doanh số (Volume) đang đánh đổi quá lớn về mặt lợi nhuận (Margin), dẫn đến thua lỗ thực tế.
+
+* **Texas, Ohio, và Pennsylvania** là 3 thị trường gây thất thoát lợi nhuận lớn nhất.
+
+* Dữ liệu cho thấy cả Doanh số và Lợi nhuận đều có xu hướng tăng rõ rệt qua từng năm (2014-2017). Quý 4 (Tháng 10, 11, 12) là quý có Doanh số và Lợi nhuận cao nhất trong tất cả các năm. Đặc biệt, Tháng 11 và Tháng 12 luôn là đỉnh điểm, đạt mức Doanh số cao nhất trong năm. Đây là điều hợp lý do ảnh hưởng của các ngày lễ lớn cuối năm (Thanksgiving, Black Friday, Giáng Sinh).
 
 * Các sản phẩm **"Hot Items"** này chủ yếu nằm trong danh mục Office Supplies (Văn phòng phẩm) - nhóm hàng thường có giá trị cao, và việc mua sắm của chúng thường gắn liền với ngân sách và chu kỳ kinh doanh của doanh nghiệp (Phân khúc Corporate/Home Office).
+
+* Các hệ thống đóng sách (Binding Systems) đạt đỉnh vào Tháng 8 (chuẩn bị năm học mới/kế hoạch quý 3) và Tháng 12 (kết thúc năm tài chính, đóng báo cáo niêm yết). 
+
+* Nhu cầu mua sắm thiết bị văn phòng, nội thất cuối năm cho các công ty hoặc chuẩn bị cho các dự án lớn, hợp đồng mới. Superstore nên tăng cường tồn kho các mặt hàng này vào cuối Quý 3/đầu Quý 4.
 
 
 ### Về mô hình (Model Performance):
 
 * **Dự đoán Lợi nhuận (Regression):**
-    * Mô hình **Random Forest Regressor** hoạt động tốt nhất với **R² ~ 0.72**.
 
-    * Mô hình **Linear Regression** kém hiệu quả hơn do các đặc trưng không có tương quan mạnh và chủ yếu là các mối quan hệ phi tuyến tính.
+    * Mô hình **Linear Regression** kém hiệu quả với **R² ~ 0.46**. Điều này là do các đặc trưng không có tương quan mạnh (Hệ số tương quan giữa các biến số < 0.5) và chủ yếu là các mối quan hệ phi tuyến tính. 
+
+    * Mô hình **Random Forest Regressor** hoạt động tốt nhất với **R² ~ 0.72**. Dùng mô hình **Linear Regression** làm mô hình cơ sở là đúng đắn để thấy được có rất nhiều mối quan hệ phi tuyến mà mô hình hồi quy không học được còn mô hình **Random Forest Regressor** thì có thể học rất tốt và đem lại hiệu suất khá ổn. Thêm vào đó, Mô hình này cung cấp tính năng `Feature Importance` để xếp hạng các đặc trưng có ảnh hưởng đến lợi nhuận - `Profit`.
 
 * **Phân cụm khách hàng (Customer Clustering):**
-    * Mô hình **K-means Clustering**: Cho thấy khả năng phân cụm tương đối ổn. Với số cụm **K = 4** được tính bằng **Elbow Method (Phương pháp khuỷu tay)**.
+    * Mô hình **K-means Clustering**: Cho thấy khả năng phân cụm tương đối ổn. Với số cụm tối ưu **Optimal_K = 4** được tính bằng **Elbow Method (Phương pháp khuỷu tay)**.
 
-    * Mô hình đối sánh - **Hierarchical Clustering (Phân cụm phân cấp)**. Dùng làm tham chiếu (benchmark) để kiểm tra độ ổn định của các cụm tìm được bởi K-Means. Kết quả cho thấy **Silhouette Score** của hai mô hình là tương đương.
+    * Mô hình đối sánh - **Hierarchical Clustering (Phân cụm phân cấp)**. Dùng làm tham chiếu (benchmark) để kiểm tra độ ổn định của các cụm tìm được bởi K-Means. Kết quả cho thấy **Silhouette Score** của hai mô hình gần như là tương đương.
 
 * **Phân loại Rủi ro Lãi/Lỗ (Classification):**
-    * Mô hình **Random Forest Classifier** đạt độ chính xác tổng thể **~97%**.
+    * Mô hình **Logistic Regression**: Được chọn làm **mô hình cơ sở (baseline)**. Ưu điểm là cấu trúc đơn giản, minh bạch. Các hệ số của mô hình giúp ta giải thích trực tiếp chiều hướng tác động: Ví dụ, hệ số dương của `Discount` sẽ xác nhận giả thuyết rằng tăng chiết khấu làm tăng xác suất rủi ro.
 
-    * Đạt chỉ số **Recall cho lớp Rủi ro (1) rất cao: 0.96**. Điều này có nghĩa là mô hình bắt được **96%** tổng số đơn hàng bị lỗ, bỏ sót rất ít các đơn hàng rủi ro.
+    * Mô hình **Random Forest Classifier** đạt độ chính xác tổng thể **~97%**. Được chọn làm **mô hình chính**. Khả năng nắm bắt các mối quan hệ **phi tuyến tính** và tương tác phức tạp giữa các biến (ví dụ: *Giảm giá cao chỉ gây lỗ nặng khi kết hợp với mặt hàng Bàn ghế*). Ngoài ra, mô hình này cũng cung cấp tính năng `Feature Importance` để xếp hạng các yếu tố cảnh báo rủi ro hàng đầu.
+
+    * Đạt chỉ số **Recall cho lớp Rủi ro (1) rất cao: 0.96**. Điều này có nghĩa là mô hình bắt được **96%** tổng số đơn hàng bị lỗ, bỏ sót rất ít các đơn hàng rủi ro. Đây là thước đo quan trọng nhất cho bài toán này.
 
 ---
 
@@ -102,31 +117,35 @@ Superstore_Sales_Analysis
 ## 6. Hướng dẫn chạy dự án (How to Run)
 Để tái lập kết quả phân tích, vui lòng thực hiện theo các bước sau:
 
-Bước 1: Clone dự án về máy và truy cập vào thư mục chính
+**Bước 1: Clone dự án về máy và truy cập vào thư mục chính**
 
 ```bash
 git clone https://github.com/TThanhc/Superstore_Sales_Analysis.git
 ```
 
-Bước 2: Cài đặt thư viện.
+**Bước 2: Cài đặt thư viện.**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Bước 3: Mở Jupyter Notebook
+**Bước 3: Khởi động Jupyter Notebook**
 
 ```bash
 jupyter notebook
 ```
 
-Bước 4: Chạy các file trong thư mục notebooks/.
+Bước 4: **Chạy lần lượt các file trong thư mục Notebooks/.**
 
 ```bash
 Run All
 ```
+**Hoặc**
+```bash
+Restart & Run All
+```
 
-**Lưu ý**: Đảm bảo đang ở thư mục chính của dự án.
+**Lưu ý**: Có thể chạy theo thứ tự **Collection** - **Exploration** - **Analysis** để đảm bảo trình tự.
 
 ## 7. Thư viện sử dụng (Dependencies List)
 Dự án được xây dựng trên ngôn ngữ Python 3.x và các thư viện sau:
