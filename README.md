@@ -88,36 +88,45 @@ Sau quá trình phân tích và huấn luyện mô hình, có thể rút ra các
 ## 5. Cấu trúc thư mục (File Structure)
 
 ```bash
-Programming_For_Data_Science_3Pandas
-├── data/
-│   └── Superstore.csv        # Dữ liệu gốc
-├── notebooks/
-│   ├── 1_EDA_Analysis.ipynb  # Phân tích khám phá dữ liệu
-│   └── 2_ML_Models.ipynb     # Huấn luyện mô hình
-├── README.md                 # Tài liệu hướng dẫn dự án
-└── requirements.txt          # Danh sách thư viện cần thiết
+Superstore_Sales_Analysis
+├── Data/
+│   └── Superstore.csv            # Dữ liệu gốc
+├── Notebooks/
+│   ├── Data_Analysis.ipynb       # Đặt câu hỏi phân tích dữ liệu (Model)
+│   ├── Data_Collection.ipynb     # Thu thập dữ liệu
+│   └── Data_Exploration.ipynb    # Khám phá dữ liệu
+├── README.md                     # Tài liệu hướng dẫn dự án
+└── requirements.txt              # Danh sách thư viện cần thiết
 ```
 
 ## 6. Hướng dẫn chạy dự án (How to Run)
 Để tái lập kết quả phân tích, vui lòng thực hiện theo các bước sau:
 
-Bước 1: Clone dự án về máy
+Bước 1: Clone dự án về máy và truy cập vào thư mục chính
 
 ```bash
-git clone https://github.com/TThanhc/Programming_For_Data_Science_3Pandas.git
-cd Programming_For_Data_Science_3Pandas
+git clone https://github.com/TThanhc/Superstore_Sales_Analysis.git
 ```
 
-Bước 2: Cài đặt môi trường & thư viện Khuyên dùng Anaconda hoặc Virtualenv.
+Bước 2: Cài đặt thư viện.
 
 ```bash
 pip install -r requirements.txt
 ```
-Bước 3: Chạy Notebook Mở Jupyter Notebook hoặc VS Code để chạy các file trong thư mục notebooks/.
+
+Bước 3: Mở Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+Bước 4: Chạy các file trong thư mục notebooks/.
 
 ```bash
 Run All
 ```
+
+**Lưu ý**: Đảm bảo đang ở thư mục chính của dự án.
 
 ## 7. Thư viện sử dụng (Dependencies List)
 Dự án được xây dựng trên ngôn ngữ Python 3.x và các thư viện sau:
